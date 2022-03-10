@@ -1,5 +1,5 @@
-# guiTemplate
-Proyecto para usar como "project Template" en Intellij. 
+# MiniPoryecto 3
+mini proyecto 3 batalla Naval by: Juan Majin - Diana Cadena
 Universidad del Valle
 Escuela de Ingeniería de Sistemas y Computación
 Asignaturas: Fundamentos de Programación Orientada a Eventos / Programación Interactiva
