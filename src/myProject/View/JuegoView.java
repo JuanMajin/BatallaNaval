@@ -3,7 +3,194 @@ package myProject.View;
     La interfaz grafica del tablero de juego del jugador
 */
 
+import myProject.Controller.JuegoController;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
 public class JuegoView {
     //Controlador asociado a la vista
+    private JuegoController ctrl;
+
+    //Casillas de los tableros
+    private ArrayList<JButton> casillasTableroJugador = new ArrayList<>();
+    private ArrayList<JButton> casillasTableroIA= new ArrayList<>();
+
+    //Componentes Graficos
+    private JFrame frame = new JFrame();
+    private JButton verIA = new JButton("Ver barcos de la IA");
+    private JButton ayuda= new JButton("?");
+    private JLabel jugadorTableroLabel = new JLabel("TABLERO DE POSICIÓN");
+    private JLabel IATableroLabel = new JLabel("TABLERO PRINCIPAL");
+    public static final String MENSAJE_INICIO="Welcome to Battleship war!"
+            +"\nIn this game you must shoot down all the enemy ships to win"
+            +"\nYou should do it before your opponent, otherwise your enemy will win."
+            +"\nin the first phase you can choose how to position your ships"
+            +"\nREMEMBER"
+            +"\n1 aircraft carrier: occupies 4 spaces"
+            +"\n2 submarines: occupy 3 spaces each."
+            +"\n3 destroyers: occupy 2 spaces each"
+            +"\n4 frigates: occupy 1 space each";
+    private Color color=new Color(52,199,254);
+    private Color color2=new Color(255,255,255);
+
+    //Contador de barcos hundidos del jugador
+    private int barcosHundidosJugador = 0;
+
+    public JuegoView(JuegoController ctrl) {
+
+        this.ctrl = ctrl;
+
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setSize(750, 480);
+        this.frame.setTitle("Batalla Naval");
+        this.frame.setLayout(null);
+
+
+        this.jugadorTableroLabel.setBounds(30, 25, 330, 30);
+        this.IATableroLabel.setBounds(380, 25, 330, 30);
+        this.frame.add(this.jugadorTableroLabel);
+        this.frame.add(this.IATableroLabel);
+
+        this.verIA.setBounds(470, 390, 150, 25);
+        this.verIA.addActionListener((ActionEvent e) -> {
+            IAView verIA = new IAView(this.ctrl.getCtrlIA().getTab().getTablero());
+        });
+
+        this.ayuda.setBounds(170,390,50,25);
+        this.ayuda.addActionListener((ActionEvent e)->{
+            JOptionPane.showMessageDialog(null, MENSAJE_INICIO);
+        });
+        this.frame.add(this.ayuda);
+
+        this.addCoordenadas(30, 55);
+        this.addCoordenadas(380, 55);
+
+
+        this.frame.add(this.verIA);
+
+        //Tablero de posiciones de barcos del jugador
+        for(int i=0; i<10; i++){
+            for(int j=0; j<10; j++){
+                this.casillasTableroJugador.add(new JButton());
+                this.casillasTableroJugador.get(this.casillasTableroJugador.size()-1).setBounds(60 + 30*j, 85 + 30*i, 30, 30);
+                this.casillasTableroJugador.get(this.casillasTableroJugador.size()-1).setEnabled(false);
+
+                if(this.ctrl.getCtrlJugador().estaDisparado(j, i)){
+
+                }
+
+                switch(this.ctrl.getCtrlJugador().getID(j, i)){
+                    case 0:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.cyan);
+                        break;
+                    case 1:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.BLUE);
+                        break;
+                    case 2:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.YELLOW);
+                        break;
+                    case 3:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.GREEN);
+                        break;
+                    case 4:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.MAGENTA);
+                        break;
+                    case 5:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.ORANGE);
+                        break;
+                    case 6:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.PINK);
+                        break;
+                    case 7:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.GREEN);
+                        break;
+                    case 8:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.WHITE);
+                        break;
+                    case 9:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.YELLOW);
+                        break;
+                    case 10:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.lightGray);
+                        break;
+                    default:
+                        this.casillasTableroJugador.get((i*10)+(j)).setBackground(Color.cyan);
+                }
+
+                this.frame.getContentPane().add(this.casillasTableroJugador.get(this.casillasTableroJugador.size()-1));
+            }
+        }
+
+        //Tablero principal del jugador donde realiza las jugadas
+        for(int i=0; i<10; i++){
+            for(int j=0; j<10; j++){
+                this.casillasTableroIA.add(new JButton());
+                this.casillasTableroIA.get(this.casillasTableroIA.size()-1).setBounds(410 + 30*j, 85 + 30*i, 30, 30);
+
+
+                int x = j;
+                int y = i;
+                /*this.casillasTableroIA.get(this.casillasTableroIA.size()-1).addActionListener((ActionEvent e) -> {
+                    {/*turnos
+
+                    }
+                        JOptionPane.showMessageDialog(null, "Por favor espera tu turno");
+
+                    if(this.barcosHundidosJugador == 10){
+                        JOptionPane.showMessageDialog(null, "¡Le has ganado a la IA!");
+                        System.exit(0);
+                    }
+
+                });*/
+
+                this.frame.getContentPane().add(this.casillasTableroIA.get(this.casillasTableroIA.size()-1));
+            }
+        }
+
+        this.frame.setVisible(true);
+        this.frame.setResizable(false);
+    }
+
+    //Agrega las coordenadas al tablero de casillas
+    private void addCoordenadas(int x, int y){
+        JButton boton0 = new JButton();
+        boton0.setBounds(x, y, 30, 30);
+        boton0.setEnabled(false);
+        boton0.setMargin(new Insets(0, 0, 0, 0));
+        boton0.setBackground(Color.WHITE);
+        this.frame.getContentPane().add(boton0);
+        for(int i=0; i<10; i++){
+            JButton botonEjeX = new JButton(String.valueOf((char)(i+65)));
+            botonEjeX.setBounds(x+30*(i+1), y, 30, 30);
+            botonEjeX.setEnabled(false);
+            botonEjeX.setMargin(new Insets(0, 0, 0, 0));
+            botonEjeX.setBackground(Color.WHITE);
+            this.frame.getContentPane().add(botonEjeX);
+        }
+        for(int i=0; i<10; i++){
+            JButton botonEjeY = new JButton(String.valueOf(i+1));
+            botonEjeY.setBounds(x, y+30*(i+1), 30, 30);
+            botonEjeY.setEnabled(false);
+            botonEjeY.setMargin(new Insets(0, 0, 0, 0));
+            botonEjeY.setBackground(Color.WHITE);
+            this.frame.getContentPane().add(botonEjeY);
+        }
+    }
+
+    //Getters
+    public ArrayList<JButton> getCasillasTableroJugador() {
+        return casillasTableroJugador;
+    }
+
+    public ArrayList<JButton> getCasillasTableroIA() {
+        return casillasTableroIA;
+    }
+
+    public void cerrar(){
+        this.frame.dispose();
+    }
 
 }
