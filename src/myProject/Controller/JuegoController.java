@@ -3,8 +3,8 @@ package myProject.Controller;
 import myProject.Model.Tablero;
 import myProject.View.JuegoView;
 
-/*
-El controlador general del juego
+/**
+*El controlador general del juego
 */
 
 public class JuegoController {

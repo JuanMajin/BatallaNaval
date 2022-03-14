@@ -1,8 +1,12 @@
 package myProject.Model;
 
+/**
+ * construye en tablero de los jugadores
+ */
+
 public class Tablero {
-    /*
-        Arreglos para la disposicion de los barcos y el identificador de casillas disparadas
+    /**
+    *   Arreglos para la disposicion de los barcos y el identificador de casillas disparadas
     */
     private int[][] tablero; //0: Espacio disponible, Otro numero: espacio ocupado
     private int[][] disparos; // 1: Disparado, 0: No disparado

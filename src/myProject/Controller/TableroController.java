@@ -2,6 +2,10 @@ package myProject.Controller;
 
 import myProject.Model.Tablero;
 
+/**
+ * Modifica el estado del tablero
+ */
+
 public class TableroController {
     private Tablero tab;
 

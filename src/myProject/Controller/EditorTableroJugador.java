@@ -5,6 +5,9 @@ import myProject.View.EditorTableroJugadorView;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
+/**
+ * se almacenan los datos de los tableros
+ */
 
 public class EditorTableroJugador {
 
