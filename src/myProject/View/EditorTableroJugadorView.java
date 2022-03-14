@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.*;
 
-/*
-Interfaz grafica del editor del tablero del jugador
+/**
+*Interfaz grafica del editor del tablero del jugador
 */
 
 public class EditorTableroJugadorView {
@@ -24,9 +24,19 @@ public class EditorTableroJugadorView {
     private ButtonGroup direccion = new ButtonGroup();
     private JRadioButton dirHor = new JRadioButton("Horizontal", true);
     private JRadioButton dirVer = new JRadioButton("Vertical", true);
+    private JButton ayuda= new JButton("?");
     private JLabel direccionText = new JLabel("Selecciona la orientación del barco");
     private JLabel instruccion = new JLabel("Selecciona la primera casilla que ocupara el barco (izquierda-derecha o arriba-abajo segun la orientacion)");
     private JLabel siguienteBarco = new JLabel("Siguiente barco a colocar: Portaaviones [4 casillas]");
+    public static final String MENSAJE_INICIO="Welcome to Batalla naval!"
+            +"\nIn this game you must shoot down all the enemy ships to win"
+            +"\nYou should do it before your opponent, otherwise your enemy will win."
+            +"\nin the first phase you can choose how to position your ships"
+            +"\nREMEMBER"
+            +"\n1 aircraft carrier: occupies 4 spaces"
+            +"\n2 submarines: occupy 3 spaces each."
+            +"\n3 destroyers: occupy 2 spaces each"
+            +"\n4 frigates: occupy 1 space each";
 
     public EditorTableroJugadorView(EditorTableroJugador ctrl) {
 
@@ -75,6 +85,12 @@ public class EditorTableroJugadorView {
                 this.frame.getContentPane().add(this.casillasTablero.get(this.casillasTablero.size()-1));
             }
         }
+
+        this.ayuda.setBounds(470,120,50,25);
+        this.ayuda.addActionListener((ActionEvent e)->{
+            JOptionPane.showMessageDialog(null, MENSAJE_INICIO);
+        });
+        this.frame.add(this.ayuda);
 
         this.frame.setVisible(true);
         this.frame.setResizable(false);

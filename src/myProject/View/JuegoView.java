@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-/*
-    La interfaz grafica del tablero de juego del jugador
+/**
+ * La interfaz grafica del tablero de juego del jugador
 */
 
 public class JuegoView {
@@ -26,8 +26,18 @@ public class JuegoView {
     //Componentes Graficos
     private JFrame frame = new JFrame();
     private JButton verIA = new JButton("Ver barcos de la IA");
+    private JButton ayuda= new JButton("?");
     private JLabel jugadorTableroLabel = new JLabel("TABLERO DE POSICIÓN");
     private JLabel IATableroLabel = new JLabel("TABLERO PRINCIPAL");
+    public static final String MENSAJE_INICIO="Welcome to Batalla naval!"
+            +"\nIn this game you must shoot down all the enemy ships to win"
+            +"\nYou should do it before your opponent, otherwise your enemy will win."
+            +"\nin the first phase you can choose how to position your ships"
+            +"\nREMEMBER"
+            +"\n1 aircraft carrier: occupies 4 spaces"
+            +"\n2 submarines: occupy 3 spaces each."
+            +"\n3 destroyers: occupy 2 spaces each"
+            +"\n4 frigates: occupy 1 space each";
 
     //Contador de barcos hundidos del jugador
     private int barcosHundidosJugador = 0;
@@ -56,6 +66,13 @@ public class JuegoView {
 
 
         this.frame.add(this.verIA);
+
+        this.ayuda.setBounds(170,390,50,25);
+        this.ayuda.addActionListener((ActionEvent e)->{
+            JOptionPane.showMessageDialog(null, MENSAJE_INICIO);
+        });
+
+        this.frame.add(this.ayuda);
 
         //Tablero de posiciones de barcos del jugador
         for(int i=0; i<10; i++){

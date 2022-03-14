@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-/*
-Vista de la disposicion de los barcos de la IA identificados por colores
+/**
+*Vista de la disposicion de los barcos de la IA identificados por colores
 */
 
 public class IAView {

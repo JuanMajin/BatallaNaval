@@ -6,8 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/*
-    Clase encargada de controlar las jugadas de la IA
+/**
+ * Clase encargada de controlar las jugadas de la IA
 */
 
 public class IAController extends Thread{
