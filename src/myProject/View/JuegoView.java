@@ -1,14 +1,19 @@
 package myProject.View;
-/*
-    La interfaz grafica del tablero de juego del jugador
-*/
 
 import myProject.Controller.JuegoController;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+/*
+    La interfaz grafica del tablero de juego del jugador
+*/
 
 public class JuegoView {
     //Controlador asociado a la vista
@@ -21,20 +26,8 @@ public class JuegoView {
     //Componentes Graficos
     private JFrame frame = new JFrame();
     private JButton verIA = new JButton("Ver barcos de la IA");
-    private JButton ayuda= new JButton("?");
     private JLabel jugadorTableroLabel = new JLabel("TABLERO DE POSICIÓN");
     private JLabel IATableroLabel = new JLabel("TABLERO PRINCIPAL");
-    public static final String MENSAJE_INICIO="Welcome to Battleship war!"
-            +"\nIn this game you must shoot down all the enemy ships to win"
-            +"\nYou should do it before your opponent, otherwise your enemy will win."
-            +"\nin the first phase you can choose how to position your ships"
-            +"\nREMEMBER"
-            +"\n1 aircraft carrier: occupies 4 spaces"
-            +"\n2 submarines: occupy 3 spaces each."
-            +"\n3 destroyers: occupy 2 spaces each"
-            +"\n4 frigates: occupy 1 space each";
-    private Color color=new Color(52,199,254);
-    private Color color2=new Color(255,255,255);
 
     //Contador de barcos hundidos del jugador
     private int barcosHundidosJugador = 0;
@@ -48,7 +41,6 @@ public class JuegoView {
         this.frame.setTitle("Batalla Naval");
         this.frame.setLayout(null);
 
-
         this.jugadorTableroLabel.setBounds(30, 25, 330, 30);
         this.IATableroLabel.setBounds(380, 25, 330, 30);
         this.frame.add(this.jugadorTableroLabel);
@@ -58,12 +50,6 @@ public class JuegoView {
         this.verIA.addActionListener((ActionEvent e) -> {
             IAView verIA = new IAView(this.ctrl.getCtrlIA().getTab().getTablero());
         });
-
-        this.ayuda.setBounds(170,390,50,25);
-        this.ayuda.addActionListener((ActionEvent e)->{
-            JOptionPane.showMessageDialog(null, MENSAJE_INICIO);
-        });
-        this.frame.add(this.ayuda);
 
         this.addCoordenadas(30, 55);
         this.addCoordenadas(380, 55);
@@ -133,10 +119,34 @@ public class JuegoView {
 
                 int x = j;
                 int y = i;
-                /*this.casillasTableroIA.get(this.casillasTableroIA.size()-1).addActionListener((ActionEvent e) -> {
-                    {/*turnos
+                this.casillasTableroIA.get(this.casillasTableroIA.size()-1).addActionListener((ActionEvent e) -> {
+                    if(!this.ctrl.getIa().isTurnoIA()){
+                        this.ctrl.getCtrlIA().dispararCasilla(x, y);
 
-                    }
+                        if(this.ctrl.getCtrlIA().estaDisparado(x, y)){
+                            if(this.ctrl.getCtrlIA().estaOcupado(x, y)){
+                                this.casillasTableroIA.get((y*10)+(x)).setBackground(Color.BLACK);
+                                if(this.ctrl.getCtrlIA().estaHundido(this.ctrl.getCtrlIA().getID(x, y))){
+                                    int[][] barcos = this.ctrl.getCtrlIA().getTab().getTablero();
+                                    for(int v=0; v<10; v++){
+                                        for(int h=0; h<10; h++){
+                                            if(barcos[h][v] == this.ctrl.getCtrlIA().getID(x, y)){
+                                                this.casillasTableroIA.get((v*10)+(h)).setBackground(Color.red);
+                                            }
+                                        }
+                                    }
+                                    this.barcosHundidosJugador++;
+                                }
+                            } else {
+                                this.casillasTableroIA.get((y*10)+(x)).setBackground(Color.cyan);
+                                this.casillasTableroIA.get((y*10)+(x)).setText("X");
+                                this.casillasTableroIA.get((y*10)+(x)).setForeground(Color.RED);
+                                this.casillasTableroIA.get((y*10)+(x)).setMargin(new Insets(0, 0, 0, 0));
+                            }
+                        }
+                        this.casillasTableroIA.get((y*10)+(x)).setEnabled(false);
+                        this.ctrl.turnoIA();
+                    } else
                         JOptionPane.showMessageDialog(null, "Por favor espera tu turno");
 
                     if(this.barcosHundidosJugador == 10){
@@ -144,7 +154,7 @@ public class JuegoView {
                         System.exit(0);
                     }
 
-                });*/
+                });
 
                 this.frame.getContentPane().add(this.casillasTableroIA.get(this.casillasTableroIA.size()-1));
             }
@@ -192,5 +202,4 @@ public class JuegoView {
     public void cerrar(){
         this.frame.dispose();
     }
-
 }
