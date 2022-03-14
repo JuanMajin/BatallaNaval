@@ -3,7 +3,12 @@ package myProject.Controller;
 import myProject.Model.Tablero;
 import myProject.View.JuegoView;
 
+/*
+El controlador general del juego
+*/
+
 public class JuegoController {
+
     //Interfaz del juego y controlador de la IA
     private JuegoView view;
     private IAController ia;
@@ -15,11 +20,11 @@ public class JuegoController {
     //Constructor
     public JuegoController(Tablero tab) {
         this.ctrlJugador =  new TableroController(tab);
-
+        this.ctrlIA = new TableroController(this.getTableroIA());
         this.view = new JuegoView(this);
 
-
-
+        ia = new IAController(this);
+        ia.start();
     }
 
     //Obtiene el tablero con los barcos de la IA
@@ -88,7 +93,9 @@ public class JuegoController {
     }
 
     //Marca la finalización del turno del jugador y el comienzo del turno de la IA
-
+    public void turnoIA(){
+        this.ia.turnoIA();
+    }
 
     //Getters de los contoladores de los tableros
     public TableroController getCtrlJugador() {
@@ -101,6 +108,10 @@ public class JuegoController {
 
     public JuegoView getView() {
         return this.view;
+    }
+
+    public IAController getIa() {
+        return ia;
     }
 
 
