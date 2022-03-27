@@ -4,7 +4,8 @@ package myProject.Controller;
  *Clase main que llama a los metodos del EditorTableroJugador para comenzar con el juego
  *
  *  @autor Juan-J Majin-M juan.majin@correounivalle.edu.co
- *  @author Diana Cadena diana.marcela.cadena@correounivalle
+ *  @author Diana Cadena diana.marcela.cadena@correounivalle.edu.co
+ *  @author Johan Loaiza Téllez loaiza.johan@correounivalle.edu.co
  *  @version v.1.0.0 date:14/03/2022
  */
 
